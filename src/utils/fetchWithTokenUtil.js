@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const AUTH_SERVER_BASEURL = "http://localhost:5000";
+const  SERVER_BASEURL  =  "http://localhost:3002" // TODO: globalize this
 
 const fetcher = async (url, method, data) => {
   const token = sessionStorage.getItem("token");
   try {
     const response = await axios({
       method,
-      url: AUTH_SERVER_BASEURL + url,
+      url: SERVER_BASEURL + url,
       data,
       headers: {
         authorization: `Bearer ${token}`,

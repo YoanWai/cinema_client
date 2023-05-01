@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// @TODO - globalize this
+// TODO: globalize this
 const AUTH_SERVER_BASEURL = "http://localhost:3002";
 const AUTH_SERVER_ENDPOINT_REGISTER = "register";
 const AUTH_SERVER_ENDPOINT_AUTHENTICATE = "authenticate";
