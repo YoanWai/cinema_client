@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const  SERVER_BASEURL  =  "http://localhost:3002" // TODO: globalize this
+const { REACT_APP_MAIN_SERVER_BASEURL } = process.env;
 
 const fetcher = async (url, method, data) => {
   const token = sessionStorage.getItem("token");
   try {
     const response = await axios({
       method,
-      url: SERVER_BASEURL + url,
+      url: REACT_APP_MAIN_SERVER_BASEURL + url,
       data,
       headers: {
         authorization: `Bearer ${token}`,

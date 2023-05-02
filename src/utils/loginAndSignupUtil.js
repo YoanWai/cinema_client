@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// TODO: globalize this
-const AUTH_SERVER_BASEURL = "http://localhost:3002";
+const { REACT_APP_AUTH_SERVER_BASEURL } = process.env;
 const AUTH_SERVER_ENDPOINT_REGISTER = "register";
 const AUTH_SERVER_ENDPOINT_AUTHENTICATE = "authenticate";
 
@@ -10,7 +9,7 @@ export async function requestRegistration(newUser) {
     newUser;
   try {
     const { data } = await axios.post(
-      AUTH_SERVER_BASEURL + "/" + AUTH_SERVER_ENDPOINT_REGISTER,
+      REACT_APP_AUTH_SERVER_BASEURL + "/" + AUTH_SERVER_ENDPOINT_REGISTER,
       {
         fullname: firstname + " " + lastname,
         username,
@@ -27,9 +26,11 @@ export async function requestRegistration(newUser) {
 }
 
 export async function requestLogin(username, password) {
+  console.log(process.env);
+
   try {
     const { data } = await axios.post(
-      AUTH_SERVER_BASEURL + "/" + AUTH_SERVER_ENDPOINT_AUTHENTICATE,
+      REACT_APP_AUTH_SERVER_BASEURL + "/" + AUTH_SERVER_ENDPOINT_AUTHENTICATE,
       {
         username,
         password,
