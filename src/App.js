@@ -56,7 +56,7 @@ function App() {
           />
           <Route path="/addmovie" element={<AddMoviePage />} />
           <Route path="/editmovie" element={<EditMoviePage />} />
-          <Route path="/memberpage" element={<MemberPage />} />
+          <Route path="/member" element={<MemberPage />} />
           <Route path="/members" element={<MembersPage />} />
           <Route path="/editmember" element={<EditMemberPage />} />
           <Route path="/addmember" element={<AddMemberPage />} />

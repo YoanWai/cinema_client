@@ -6,13 +6,11 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import ViewSubscriptionsButton from "./ViewSubscribedMoviesComp";
-
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import fetcher from "../utils/fetchWithTokenUtil";
+import ViewSubscriptionsButton from "./ViewSubscribedMoviesComp";
 
 export default function MemberCard({ member }) {
   const navigate = useNavigate();
@@ -48,7 +46,7 @@ export default function MemberCard({ member }) {
       sx={{
         width: 270,
         height: 250,
-        margin: "10px",
+        margin: "auto",
         padding: "10px",
       }}
       style={{ boxShadow: "1px 1px 5px 1px rgba(0,0,0,0.3)" }}

@@ -1,7 +1,9 @@
 import * as React from "react";
+
+import { useSelector } from "react-redux";
+
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 
 export default function MovieSearch(props) {

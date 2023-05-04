@@ -1,3 +1,9 @@
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import ViewMovieButton from "../components/ViewMovieButton";
+import fetcher from "../utils/fetchWithTokenUtil";
+
 import {
   Button,
   Card,
@@ -7,10 +13,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import ViewMovieButton from "../components/ViewMovieButton";
-import fetcher from "../utils/fetchWithTokenUtil";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
   const dispatch = useDispatch();

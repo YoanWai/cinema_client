@@ -1,6 +1,9 @@
 import Button from "@mui/material/Button";
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+// THIS PAGE IS NOT IN USE
 
 function MainMenu({ callback }) {
   const navigate = useNavigate();

@@ -16,9 +16,10 @@ import {
   CardHeader,
 } from "@mui/material";
 
-import fetcher from "../utils/fetchWithTokenUtil";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+
+import fetcher from "../utils/fetchWithTokenUtil";
 
 export default function AccountPage() {
   const dispatch = useDispatch();

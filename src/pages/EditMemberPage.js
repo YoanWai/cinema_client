@@ -1,12 +1,13 @@
 import * as React from "react";
 
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import fetcher from "../utils/fetchWithTokenUtil";
+
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
-import { useNavigate, useLocation } from "react-router-dom";
-import fetcher from "../utils/fetchWithTokenUtil";
-import { useDispatch } from "react-redux";
 
 export default function EditMemberPage() {
   const navigate = useNavigate();

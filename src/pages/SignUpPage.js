@@ -1,4 +1,9 @@
 import * as React from "react";
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { requestRegistration } from "../utils/loginAndSignupUtil";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,10 +15,6 @@ import LiveTvIcon from "@mui/icons-material/LiveTv";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { requestRegistration } from "../utils/loginAndSignupUtil";
 
 const theme = createTheme();
 

@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import MemberCard from "../components/MemberCardComp";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
+import MemberCard from "../components/MemberCardComp";
 import getFromDbToRedux from "../utils/getFromDbToRedux";
+
+import { Button } from "@mui/material";
 
 export default function MembersPage() {
   const navigate = useNavigate();

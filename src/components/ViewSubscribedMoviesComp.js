@@ -1,9 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
@@ -16,7 +14,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -162,7 +159,6 @@ const AddSubscription = ({ member, callback }) => {
 };
 
 export default function ViewSubscriptionsButton({ member }) {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [open, setOpen] = React.useState(false);

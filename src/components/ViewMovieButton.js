@@ -1,8 +1,7 @@
 import * as React from "react";
 
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
@@ -56,7 +55,6 @@ ViewButton.propTypes = {
 export default function ViewMovieButton({ movie }) {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -93,7 +91,7 @@ export default function ViewMovieButton({ movie }) {
                         <span
                           style={{ cursor: "pointer", color: "blue" }}
                           onClick={() =>
-                            navigate("/editmember", {
+                            navigate("/member", {
                               state: {
                                 member: members.find(
                                   (m) => m._id === sub.memberId
@@ -109,6 +107,8 @@ export default function ViewMovieButton({ movie }) {
                         <br />
                       </span>
                     );
+                  } else {
+                    return null;
                   }
                 })
               : null}
