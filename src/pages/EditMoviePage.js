@@ -86,7 +86,9 @@ export default function EditMoviePage() {
     const response = await fetcher("/movies/" + movie._id, "PUT", editedMovie);
     if (response.status === 200) {
       myAlert("Movie updated successfully", "success");
-      navigate("/allmovies");
+      setTimeout(() => {
+        navigate("/allmovies");
+      }, 2000);
     }
   }
 

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import MemberCard from "../components/MemberCardComp";
 import getFromDbToRedux from "../utils/getFromDbToRedux";
 
+import { alertContainer } from "../utils/alertUtil";
+
 import { Button } from "@mui/material";
 
 export default function MembersPage() {
@@ -64,6 +66,7 @@ export default function MembersPage() {
       >
         Add New Member
       </Button>
+      {alertContainer()}
     </div>
   );
 }

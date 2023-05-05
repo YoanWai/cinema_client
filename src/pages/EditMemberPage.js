@@ -37,7 +37,9 @@ export default function EditMemberPage() {
     if (response.status === 200) {
       dispatch({ type: "UPDATE_MEMBER", payload: updatedMember });
       myAlert("Member updated successfully", "success");
-      navigate("/members");
+      setTimeout(() => {
+        navigate("/members");
+      }, 2000);
     } else {
       console.log(`Error updating member: ${response.status}`);
       myAlert("Error updating member", "error");

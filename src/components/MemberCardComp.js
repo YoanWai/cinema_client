@@ -28,8 +28,9 @@ export default function MemberCard({ member }) {
       dispatch({ type: "DELETE_MEMBER", payload: member });
       console.log(`deleted member: ${JSON.stringify(member)}`);
       myAlert("Member deleted successfully", "success");
-
-      navigate("/members");
+      setTimeout(() => {
+        navigate("/members");
+      }, 2000);
     } else {
       console.log(`error deleting member: ${JSON.stringify(member)}`);
       myAlert("Error deleting member", "error");

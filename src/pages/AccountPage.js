@@ -32,7 +32,9 @@ export default function AccountPage() {
   const checkUser = () => {
     if (!user) {
       myAlert("You are not logged in. Please login.");
-      window.location.href = "/login";
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
     }
   };
 
