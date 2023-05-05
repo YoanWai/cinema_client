@@ -65,7 +65,6 @@ export default function LoginPage({ callback }) {
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
       dispatch({ type: "LOGIN_USER", payload: response.data.user });
       console.log(response.data);
-      alert("Login successful "); // @todo remove this alert and use a snackbar instead (see https://material-ui.com/components/snackbars/)
       navigate("/allmovies");
     }
   };

@@ -34,7 +34,7 @@ export default function AccountPage() {
       myAlert("You are not logged in. Please login.");
       setTimeout(() => {
         window.location.href = "/login";
-      }, 2000);
+      }, 1500);
     }
   };
 

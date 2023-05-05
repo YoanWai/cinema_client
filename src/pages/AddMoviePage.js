@@ -34,7 +34,7 @@ export default function AddMoviePage() {
       myAlert("Movie added successfully", "success");
       setTimeout(() => {
         navigate("/allmovies");
-      }, 2000);
+      }, 1500);
     } else {
       myAlert("Error adding movie", "error");
       console.log(response);

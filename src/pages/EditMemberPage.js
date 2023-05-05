@@ -39,7 +39,7 @@ export default function EditMemberPage() {
       myAlert("Member updated successfully", "success");
       setTimeout(() => {
         navigate("/members");
-      }, 2000);
+      }, 1500);
     } else {
       console.log(`Error updating member: ${response.status}`);
       myAlert("Error updating member", "error");

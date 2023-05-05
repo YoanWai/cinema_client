@@ -24,7 +24,7 @@ export default function AddMemberPage() {
       dispatch({ type: "ADD_MEMBER", payload: member });
       setTimeout(() => {
         navigate("/members");
-      }, 2000);
+      }, 1500);
     } else {
       myAlert("Error adding member", "error");
       console.log(`Error adding member: ${response.status}`);
