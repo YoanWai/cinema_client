@@ -26,7 +26,6 @@ export async function requestRegistration(newUser) {
 }
 
 export async function requestLogin(username, password) {
-  console.log(process.env);
 
   try {
     const { data } = await axios.post(

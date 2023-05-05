@@ -31,7 +31,7 @@ const Footer = () => {
         align="center"
         gutterBottom
       >
-        Footer
+        Cinema
       </Typography>
       <Typography
         sx={{ fontSize: "12px" }}
@@ -40,7 +40,7 @@ const Footer = () => {
         color="text.secondary"
         component="p"
       >
-        Something here to give the footer a purpose!
+        BoostApp 2023 final project
       </Typography>
       <Copyright />
     </Box>

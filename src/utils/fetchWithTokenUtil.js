@@ -16,8 +16,8 @@ const fetcher = async (url, method, data) => {
 
     return response;
   } catch (error) {
+    alert("Network error. Please try again later.");
     console.log(error);
-    console.log(error?.response?.data);
     if (error.response.status === 401) {
       sessionStorage.removeItem("token");
       alert("You are not authorized to access this page. Please login."); // TODO: Replace with a modal

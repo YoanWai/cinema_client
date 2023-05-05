@@ -45,29 +45,28 @@ export default function LoginPage({ callback }) {
       password: inputs.get("password"),
     };
 
-    const { success, response, data } = await requestLogin(
-      payload.username,
-      payload.password
-    );
+    const response = await requestLogin(payload.username, payload.password);
+    console.log(response);
 
-    if (!success) {
-      setError(response.data.message);
+    if (response.code === "ERR_NETWORK") {
+      setError("Network error. Please try again later.");
       setShowError(true);
       return;
     }
-    if (success) {
-      sessionStorage.setItem("token", data.token);
-      sessionStorage.setItem("user", JSON.stringify(data.user));
-      dispatch({ type: "LOGIN_USER", payload: data.user });
-      console.log(data);
+
+    if (response.status === 403) {
+      setError(response.response.data.message);
+      setShowError(true);
+      return;
+    }
+
+    if (response.success) {
+      sessionStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("user", JSON.stringify(response.data.user));
+      dispatch({ type: "LOGIN_USER", payload: response.data.user });
+      console.log(response.data);
       alert("Login successful "); // @todo remove this alert and use a snackbar instead (see https://material-ui.com/components/snackbars/)
       navigate("/allmovies");
-    }
-
-    if (!response) {
-      setError("Something went wrong. Please try again later.");
-      setShowError(true);
-      return;
     }
   };
 

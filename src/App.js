@@ -61,7 +61,6 @@ function App() {
           <Route path="/editmember" element={<EditMemberPage />} />
           <Route path="/addmember" element={<AddMemberPage />} />
           <Route path="/account" element={<AccountPage />} />
-
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </div>
