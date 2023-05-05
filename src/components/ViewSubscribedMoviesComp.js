@@ -19,6 +19,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
+import { myAlert, alertContainer } from "../utils/alertUtil";
+
 import fetcher from "../utils/fetchWithTokenUtil";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -71,14 +73,22 @@ const AddSubscription = ({ member, callback }) => {
   const movies = useSelector((state) => state.movies);
 
   const handleAddSubscription = async () => {
+    if (newSubscription.movieId === "") {
+      myAlert("Please select a movie", "error");
+      return;
+    } else if (newSubscription.date === "") {
+      myAlert("Please select a date", "error");
+      return;
+    }
+
     const response = await fetcher("/subscriptions", "POST", newSubscription);
 
     if (response) {
       dispatch({ type: "ADD_SUBSCRIPTION", payload: newSubscription });
-      alert("Subscription added successfully");
+      myAlert("Subscription added successfully", "success");
       callback();
     } else {
-      alert("Error adding subscription");
+      myAlert("Subscription failed to add", "error");
     }
 
     console.log("newSubscription:", newSubscription);
@@ -154,6 +164,7 @@ const AddSubscription = ({ member, callback }) => {
           Cancel
         </Button>
       </span>
+      {alertContainer()}
     </span>
   );
 };

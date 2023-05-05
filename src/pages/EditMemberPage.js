@@ -9,6 +9,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import { myAlert, alertContainer } from "../utils/alertUtil";
+
 export default function EditMemberPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,11 +36,11 @@ export default function EditMemberPage() {
     console.log(response);
     if (response.status === 200) {
       dispatch({ type: "UPDATE_MEMBER", payload: updatedMember });
-      alert("Member updated successfully");
+      myAlert("Member updated successfully", "success");
       navigate("/members");
     } else {
       console.log(`Error updating member: ${response.status}`);
-      alert("Error updating member");
+      myAlert("Error updating member", "error");
     }
   };
 
@@ -75,58 +77,61 @@ export default function EditMemberPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.title}>Edit Member</div>
-      <div style={styles.membername}>{member.name}</div>
-      <div style={styles.inputs}>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": {
-              m: 1,
-              width: "25ch",
-              display: "block",
-            },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            defaultValue={member.name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="City"
-            variant="outlined"
-            defaultValue={member.city}
-            onChange={(e) => setCity(e.target.value)}
-          />
+    <>
+      <div style={styles.container}>
+        <div style={styles.title}>Edit Member</div>
+        <div style={styles.membername}>{member.name}</div>
+        <div style={styles.inputs}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": {
+                m: 1,
+                width: "25ch",
+                display: "block",
+              },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              label="Name"
+              variant="outlined"
+              defaultValue={member.name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="City"
+              variant="outlined"
+              defaultValue={member.city}
+              onChange={(e) => setCity(e.target.value)}
+            />
 
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            defaultValue={member.email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Box>
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              defaultValue={member.email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Box>
+        </div>
+        <Button variant="contained" size="small" onClick={() => updateMember()}>
+          Update
+        </Button>
+        <Button
+          color="error"
+          variant="contained"
+          size="small"
+          onClick={() => navigate("/members")}
+          sx={{ marginLeft: "20px" }}
+        >
+          Cancel
+        </Button>
+        {alertContainer()}
       </div>
-      <Button variant="contained" size="small" onClick={() => updateMember()}>
-        Update
-      </Button>
-      <Button
-        color="error"
-        variant="contained"
-        size="small"
-        onClick={() => navigate("/members")}
-        sx={{ marginLeft: "20px" }}
-      >
-        Cancel
-      </Button>
-    </div>
+    </>
   );
 }

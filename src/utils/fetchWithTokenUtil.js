@@ -1,4 +1,5 @@
 import axios from "axios";
+import { myAlert, alertContainer } from "./alertUtil";
 
 const { REACT_APP_MAIN_SERVER_BASEURL } = process.env;
 
@@ -16,8 +17,10 @@ const fetcher = async (url, method, data) => {
 
     return response;
   } catch (error) {
-    alert("Network error. Please try again later.");
     console.log(error);
+    if (error.code === "ERR_NETWORK") {
+      alert("Network error. Please try again later.");
+    }
     if (error.response.status === 401) {
       sessionStorage.removeItem("token");
       alert("You are not authorized to access this page. Please login."); // TODO: Replace with a modal

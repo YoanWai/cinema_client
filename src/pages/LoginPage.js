@@ -54,7 +54,7 @@ export default function LoginPage({ callback }) {
       return;
     }
 
-    if (response.status === 403) {
+    if (response?.response?.status === 403) {
       setError(response.response.data.message);
       setShowError(true);
       return;

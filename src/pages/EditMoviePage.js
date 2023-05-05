@@ -12,6 +12,8 @@ import Stack from "@mui/material/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 
+import { myAlert, alertContainer } from "../utils/alertUtil";
+
 export default function EditMoviePage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -83,7 +85,7 @@ export default function EditMoviePage() {
   async function updateMovie() {
     const response = await fetcher("/movies/" + movie._id, "PUT", editedMovie);
     if (response.status === 200) {
-      alert("Movie updated successfully.");
+      myAlert("Movie updated successfully", "success");
       navigate("/allmovies");
     }
   }
@@ -96,141 +98,144 @@ export default function EditMoviePage() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.title}>Edit Movie</div>
-      <div style={styles.moviename}>{editedMovie.name}</div>
-      <div style={styles.inputs}>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": {
-              m: 1,
-              width: "25ch",
-              display: "block",
-            },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            defaultValue={editedMovie.name}
-            onChange={(e) => {
-              setEditedMovie({ ...editedMovie, name: e.target.value });
+    <>
+      <div style={styles.container}>
+        <div style={styles.title}>Edit Movie</div>
+        <div style={styles.moviename}>{editedMovie.name}</div>
+        <div style={styles.inputs}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": {
+                m: 1,
+                width: "25ch",
+                display: "block",
+              },
             }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Year"
-            type="number"
-            variant="outlined"
-            defaultValue={editedMovie.year}
-            onChange={(e) => {
-              setEditedMovie({ ...editedMovie, year: e.target.value });
-            }}
-          />
-
-          <TextField
-            id="outlined-basic"
-            label="Image Source"
-            variant="outlined"
-            defaultValue={editedMovie.image}
-            onChange={(e) => {
-              setEditedMovie({ ...editedMovie, image: e.target.value });
-            }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Description"
-            variant="outlined"
-            defaultValue={editedMovie.description}
-            onChange={(e) => {
-              setEditedMovie({ ...editedMovie, description: e.target.value });
-            }}
-          ></TextField>
-        </Box>
-
-        <div style={styles.genres}>
-          <div style={styles.genresinputs}>
+            noValidate
+            autoComplete="off"
+          >
             <TextField
-              size="small"
               id="outlined-basic"
-              label="Genre"
+              label="Name"
               variant="outlined"
+              defaultValue={editedMovie.name}
               onChange={(e) => {
-                setNewGenre(e.target.value);
+                setEditedMovie({ ...editedMovie, name: e.target.value });
               }}
             />
-            <Button
-              style={styles.addbutton}
-              color="success"
-              size="small"
-              onClick={() =>
-                setEditedMovie({
-                  ...editedMovie,
-                  genres: [...editedMovie.genres, newGenre],
-                })
-              }
-            >
-              <AddIcon />
-            </Button>
-          </div>
-          <div>
-            Genres:{" "}
-            {editedMovie.genres?.map((genre) => (
-              <span key={genre} onClick={() => deleteGenre(genre)}>
-                {genre},{" "}
-              </span>
-            ))}
-          </div>
-        </div>
+            <TextField
+              id="outlined-basic"
+              label="Year"
+              type="number"
+              variant="outlined"
+              defaultValue={editedMovie.year}
+              onChange={(e) => {
+                setEditedMovie({ ...editedMovie, year: e.target.value });
+              }}
+            />
 
-        <div style={styles.description}>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            style={{
-              borderRadius: "10px",
-              resize: "none",
-              border: " 1px solid rgba(0,0,0,0.24) ",
-              fontFamily: "Ariel",
-            }}
-            rows="6"
-            cols="26"
-            defaultValue={editedMovie.description}
-            onChange={(e) => {
-              setEditedMovie({ ...editedMovie, description: e.target.value });
-            }}
-          />
-        </div>
+            <TextField
+              id="outlined-basic"
+              label="Image Source"
+              variant="outlined"
+              defaultValue={editedMovie.image}
+              onChange={(e) => {
+                setEditedMovie({ ...editedMovie, image: e.target.value });
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Description"
+              variant="outlined"
+              defaultValue={editedMovie.description}
+              onChange={(e) => {
+                setEditedMovie({ ...editedMovie, description: e.target.value });
+              }}
+            ></TextField>
+          </Box>
 
-        <div style={styles.ratingheader}>Rating:</div>
-        <Stack spacing={1} sx={{ mb: 4 }}>
-          <Rating
-            name="simple-controlled"
-            value={ratingValue}
-            precision={0.5}
-            onChange={(e) => {
-              setRatingValue(+e.target.value);
-              setEditedMovie({ ...editedMovie, rating: e.target.value });
-            }}
-          />
-        </Stack>
+          <div style={styles.genres}>
+            <div style={styles.genresinputs}>
+              <TextField
+                size="small"
+                id="outlined-basic"
+                label="Genre"
+                variant="outlined"
+                onChange={(e) => {
+                  setNewGenre(e.target.value);
+                }}
+              />
+              <Button
+                style={styles.addbutton}
+                color="success"
+                size="small"
+                onClick={() =>
+                  setEditedMovie({
+                    ...editedMovie,
+                    genres: [...editedMovie.genres, newGenre],
+                  })
+                }
+              >
+                <AddIcon />
+              </Button>
+            </div>
+            <div>
+              Genres:{" "}
+              {editedMovie.genres?.map((genre) => (
+                <span key={genre} onClick={() => deleteGenre(genre)}>
+                  {genre},{" "}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div style={styles.description}>
+            <label htmlFor="description">Description:</label>
+            <textarea
+              id="description"
+              style={{
+                borderRadius: "10px",
+                resize: "none",
+                border: " 1px solid rgba(0,0,0,0.24) ",
+                fontFamily: "Ariel",
+              }}
+              rows="6"
+              cols="26"
+              defaultValue={editedMovie.description}
+              onChange={(e) => {
+                setEditedMovie({ ...editedMovie, description: e.target.value });
+              }}
+            />
+          </div>
+
+          <div style={styles.ratingheader}>Rating:</div>
+          <Stack spacing={1} sx={{ mb: 4 }}>
+            <Rating
+              name="simple-controlled"
+              value={ratingValue}
+              precision={0.5}
+              onChange={(e) => {
+                setRatingValue(+e.target.value);
+                setEditedMovie({ ...editedMovie, rating: e.target.value });
+              }}
+            />
+          </Stack>
+        </div>
+        <Button variant="contained" size="small" onClick={() => updateMovie()}>
+          Update
+        </Button>
+        <Button
+          color="error"
+          variant="contained"
+          size="small"
+          onClick={() => navigate("/allmovies")}
+          sx={{ marginLeft: "20px" }}
+        >
+          Cancel
+        </Button>
       </div>
-      <Button variant="contained" size="small" onClick={() => updateMovie()}>
-        Update
-      </Button>
-      <Button
-        color="error"
-        variant="contained"
-        size="small"
-        onClick={() => navigate("/allmovies")}
-        sx={{ marginLeft: "20px" }}
-      >
-        Cancel
-      </Button>
-    </div>
+      {alertContainer()}
+    </>
   );
 }

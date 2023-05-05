@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import fetcher from "../utils/fetchWithTokenUtil";
 import ViewSubscriptionsButton from "./ViewSubscribedMoviesComp";
 
+import { myAlert, alertContainer } from "../utils/alertUtil";
+
 export default function MemberCard({ member }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,10 +26,13 @@ export default function MemberCard({ member }) {
     const response = await fetcher(`/members/${member._id}`, "DELETE");
     if (response) {
       dispatch({ type: "DELETE_MEMBER", payload: member });
-      alert("Member deleted successfully");
+      console.log(`deleted member: ${JSON.stringify(member)}`);
+      myAlert("Member deleted successfully", "success");
+
       navigate("/members");
     } else {
-      alert("Error deleting member");
+      console.log(`error deleting member: ${JSON.stringify(member)}`);
+      myAlert("Error deleting member", "error");
     }
 
     memberSubscriptions.forEach(async (sub) => {
@@ -42,44 +47,47 @@ export default function MemberCard({ member }) {
   };
 
   return (
-    <Card
-      sx={{
-        width: 270,
-        height: 250,
-        margin: "auto",
-        padding: "10px",
-      }}
-      style={{ boxShadow: "1px 1px 5px 1px rgba(0,0,0,0.3)" }}
-    >
-      <CardContent>
-        <Typography variant="h5" component="div">
-          Name: {member.name}
-        </Typography>{" "}
-        <br />
-        <Typography variant="h7" component="div">
-          Email: {member.email}
-        </Typography>
-        <Typography variant="h7" component="div">
-          City: {member.city}
-        </Typography>{" "}
-        <br />
-        <Button
-          size="small"
-          onClick={() => {
-            navigate(`/editmember`, {
-              state: { member: member },
-            });
-          }}
-        >
-          Edit
-        </Button>
-        <Button size="small" onClick={() => deleteMember()}>
-          Delete
-        </Button>
-      </CardContent>
-      <CardActions>
-        <ViewSubscriptionsButton member={member} />
-      </CardActions>
-    </Card>
+    <>
+      <Card
+        sx={{
+          width: 270,
+          height: 250,
+          margin: "auto",
+          padding: "10px",
+        }}
+        style={{ boxShadow: "1px 1px 5px 1px rgba(0,0,0,0.3)" }}
+      >
+        <CardContent>
+          <Typography variant="h5" component="div">
+            Name: {member.name}
+          </Typography>{" "}
+          <br />
+          <Typography variant="h7" component="div">
+            Email: {member.email}
+          </Typography>
+          <Typography variant="h7" component="div">
+            City: {member.city}
+          </Typography>{" "}
+          <br />
+          <Button
+            size="small"
+            onClick={() => {
+              navigate(`/editmember`, {
+                state: { member: member },
+              });
+            }}
+          >
+            Edit
+          </Button>
+          <Button size="small" onClick={() => deleteMember()}>
+            Delete
+          </Button>
+        </CardContent>
+        <CardActions>
+          <ViewSubscriptionsButton member={member} />
+        </CardActions>
+      </Card>
+      {alertContainer()}
+    </>
   );
 }

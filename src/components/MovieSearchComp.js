@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function MovieSearch(props) {
   const movies = useSelector((state) => state.movies).map((movie) => {
@@ -24,8 +26,17 @@ export default function MovieSearch(props) {
           `found movie name: ${movie.label}, movie year: ${movie.year}`
         );
       } else {
-        console.log("movie not found");
-        alert("Movie not found");
+        console.log("Movie not found");
+        toast.error("Movie not found", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         props.handleFoundMovie(null);
       }
     }
@@ -42,7 +53,16 @@ export default function MovieSearch(props) {
       );
     } else {
       console.log("movie not found");
-      alert("Movie not found");
+      toast.error("Movie not found", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       props.handleFoundMovie(null);
     }
   };
@@ -77,6 +97,19 @@ export default function MovieSearch(props) {
       >
         Search
       </Button>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        limit={2}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

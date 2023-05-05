@@ -19,6 +19,8 @@ import {
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+import { myAlert, alertContainer } from "../utils/alertUtil";
+
 import fetcher from "../utils/fetchWithTokenUtil";
 
 export default function AccountPage() {
@@ -29,7 +31,7 @@ export default function AccountPage() {
 
   const checkUser = () => {
     if (!user) {
-      alert("You are not authorized to access this page. Please login."); // TODO: Replace with a modal
+      myAlert("You are not logged in. Please login.");
       window.location.href = "/login";
     }
   };
@@ -64,11 +66,11 @@ export default function AccountPage() {
 
     const response = await fetcher(`/users/${user.id}`, "PUT", userToSend);
     if (response.status === 200) {
-      alert("User updated successfully");
+      myAlert("User updated successfully", "success");
       dispatch({ type: "UPDATE_USER", payload: userToSend });
     } else {
       console.log(`Error updating user: ${response.status}`);
-      alert("Error updating user");
+      myAlert("Error updating user", "error");
     }
   }
 
@@ -78,10 +80,11 @@ export default function AccountPage() {
     const newImage = new File([image], `${user.id}`, { type: image.type });
     const response = await fetcher(`/images`, "POST", newImage);
     if (response.status === 200) {
-      alert("Image uploaded successfully");
+      console.log("Image uploaded successfully");
+      myAlert("Image uploaded successfully", "success");
     } else {
       console.log(`Error uploading image: ${response.status}`);
-      alert("Error uploading image");
+      myAlert("Error uploading image", "error");
     }
   };
 
@@ -254,6 +257,7 @@ export default function AccountPage() {
           </Stack>
         </Container>
       </Box>
+      {alertContainer()}
     </>
   );
 }
