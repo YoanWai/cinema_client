@@ -44,6 +44,7 @@ export default function MovieCard({ movie }) {
             height: "100%",
             display: "flex",
             flexDirection: "column",
+            width: "270px",
           }}
         >
           <CardMedia

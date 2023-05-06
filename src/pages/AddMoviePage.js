@@ -41,6 +41,22 @@ export default function AddMoviePage() {
     }
   };
 
+  const handleAddGenre = () => {
+    if (newGenre === "") {
+      myAlert("Please enter a genre", "error");
+      return;
+    }
+    if (newMovie.genres.includes(newGenre)) {
+      myAlert("Genre already exists", "error");
+      return;
+    }
+    setNewMovie({
+      ...newMovie,
+      genres: [...newMovie.genres, newGenre],
+    });
+    setNewGenre("");
+  };
+
   const deleteGenre = (genre) => {
     setNewMovie({
       ...newMovie,
@@ -50,6 +66,7 @@ export default function AddMoviePage() {
 
   const styles = {
     container: {
+      backgroundColor: "white",
       border: "1px solid rgba(0, 0, 0, 0.24)",
       width: "30%",
       margin: "auto",
@@ -70,6 +87,7 @@ export default function AddMoviePage() {
       padding: "10px",
       margin: "auto",
       width: "194px",
+      height: "fit-content",
     },
     genresinputs: {
       display: "flex",
@@ -167,26 +185,31 @@ export default function AddMoviePage() {
                 onChange={(e) => {
                   setNewGenre(e.target.value);
                 }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleAddGenre(newGenre);
+                  }
+                }}
+                value={newGenre}
               />
               <Button
                 style={styles.addbutton}
                 color="success"
                 size="small"
-                onClick={() =>
-                  setNewMovie({
-                    ...newMovie,
-                    genres: [...newMovie.genres, newGenre],
-                  })
-                }
+                onClick={() => handleAddGenre(newGenre)}
               >
                 <AddIcon />
               </Button>
             </div>
-            <div>
+            <div style={{ textOverflow: "ellipsis", overflow: "hidden" }}>
               Genres:{" "}
               {newMovie.genres?.map((genre, index) => (
-                <span key={index} onClick={() => deleteGenre(genre)}>
-                  {genre},
+                <span
+                  title={genre}
+                  key={index}
+                  onClick={() => deleteGenre(genre)}
+                >
+                  {genre},{" "}
                 </span>
               ))}
             </div>

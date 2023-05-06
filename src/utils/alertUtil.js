@@ -75,6 +75,7 @@ const alertContainer = () => {
         draggable
         pauseOnHover
         theme="colored"
+        limit={3}
       />
     </div>
   );

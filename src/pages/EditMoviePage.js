@@ -99,6 +99,22 @@ export default function EditMoviePage() {
     });
   };
 
+  const handleAddGenre = () => {
+    if (newGenre === "") {
+      myAlert("Please enter a genre", "error");
+      return;
+    }
+    if (editedMovie.genres.includes(newGenre)) {
+      myAlert("Genre already exists", "error");
+      return;
+    }
+    setEditedMovie({
+      ...editedMovie,
+      genres: [...editedMovie.genres, newGenre],
+    });
+    setNewGenre("");
+  };
+
   return (
     <>
       <div style={styles.container}>
@@ -167,25 +183,30 @@ export default function EditMoviePage() {
                 onChange={(e) => {
                   setNewGenre(e.target.value);
                 }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleAddGenre(newGenre);
+                  }
+                }}
+                value={newGenre}
               />
               <Button
                 style={styles.addbutton}
                 color="success"
                 size="small"
-                onClick={() =>
-                  setEditedMovie({
-                    ...editedMovie,
-                    genres: [...editedMovie.genres, newGenre],
-                  })
-                }
+                onClick={() => handleAddGenre(newGenre)}
               >
                 <AddIcon />
               </Button>
             </div>
-            <div>
+            <div style={{ textOverflow: "ellipsis", overflow: "hidden" }}>
               Genres:{" "}
-              {editedMovie.genres?.map((genre) => (
-                <span key={genre} onClick={() => deleteGenre(genre)}>
+              {editedMovie.genres?.map((genre, index) => (
+                <span
+                  title={genre}
+                  key={index}
+                  onClick={() => deleteGenre(genre)}
+                >
                   {genre},{" "}
                 </span>
               ))}
