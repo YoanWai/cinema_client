@@ -38,29 +38,61 @@ function App() {
         <Outlet />
         <Routes>
           <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
             path="/login"
             element={<LoginPage callback={handleHidingNavBarAndFooter} />}
           />
           <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
             path="/"
             element={<LoginPage callback={handleHidingNavBarAndFooter} />}
           />
           <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
             path="/signup"
             element={<SignUpPage callback={handleHidingNavBarAndFooter} />}
           />
 
           <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
             path="/allmovies"
             element={<AllMoviesPage callback={handleShowingNavBarAndFooter} />}
           />
-          <Route path="/addmovie" element={<AddMoviePage />} />
-          <Route path="/editmovie" element={<EditMoviePage />} />
-          <Route path="/member" element={<MemberPage />} />
-          <Route path="/members" element={<MembersPage />} />
-          <Route path="/editmember" element={<EditMemberPage />} />
-          <Route path="/addmember" element={<AddMemberPage />} />
-          <Route path="/account" element={<AccountPage />} />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/addmovie"
+            element={<AddMoviePage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/editmovie"
+            element={<EditMoviePage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/member"
+            element={<MemberPage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/members"
+            element={<MembersPage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/editmember"
+            element={<EditMemberPage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/addmember"
+            element={<AddMemberPage />}
+          />
+          <Route
+            basename={process.env.REACT_APP_MAIN_SERVER_BASEURL}
+            path="/account"
+            element={<AccountPage />}
+          />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </div>

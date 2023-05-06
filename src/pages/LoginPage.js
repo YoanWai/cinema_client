@@ -55,7 +55,8 @@ export default function LoginPage({ callback }) {
     }
 
     if (response.code === "ERR_BAD_REQUEST") {
-      setError("Server error. Please try again later.");
+      console.log(`Error: ${response.response.data.message}`);
+      setError(response.response.data.message);
       setShowError(true);
       return;
     }
