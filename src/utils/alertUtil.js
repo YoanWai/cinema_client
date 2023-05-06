@@ -2,53 +2,62 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const myAlert = (message, type) => {
-  if (type === "error") {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  }
-  if (type === "success") {
-    toast.success(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  }
-
-  if (type === "warn") {
-    toast.warn(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-    });
-
-    if (type === "info") {
-      toast.info(message, {
+  switch (type) {
+    case "error":
+      toast.error(message, {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      break;
+
+    case "success":
+      toast.success(message, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      break;
+
+    case "warn":
+      toast.warn(message, {
+        position: "top-center",
+        autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         theme: "colored",
       });
-    }
+
+      break;
+
+    case "info":
+      toast.info(message, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+
+      break;
+
+    default:
   }
 };
 
@@ -57,7 +66,7 @@ const alertContainer = () => {
     <div>
       <ToastContainer
         position="top-center"
-        autoClose={2000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
