@@ -54,6 +54,12 @@ export default function LoginPage({ callback }) {
       return;
     }
 
+    if (response.code === "ERR_BAD_REQUEST") {
+      setError("Server error. Please try again later.");
+      setShowError(true);
+      return;
+    }
+
     if (response?.response?.status === 403) {
       setError(response.response.data.message);
       setShowError(true);
