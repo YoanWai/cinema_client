@@ -3,7 +3,7 @@ import { myAlert, alertContainer } from "./alertUtil";
 
 const { REACT_APP_MAIN_SERVER_BASEURL } = process.env;
 
-const fetcher = async (url, method, data) => {
+const fetcher = async (url, method, data, headers) => {
   const token = sessionStorage.getItem("token");
   try {
     const response = await axios({
@@ -12,6 +12,7 @@ const fetcher = async (url, method, data) => {
       data,
       headers: {
         authorization: `Bearer ${token}`,
+        ...headers,
       },
     });
 

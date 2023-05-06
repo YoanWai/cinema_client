@@ -185,7 +185,7 @@ function ResponsiveAppBar() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt={user?.fullname?.slice(0, 1)}
-                    src={`http://localhost:5000/images/${user?._id}`}
+                    src={`${process.env.REACT_APP_MAIN_SERVER_BASEURL}/images/${user?.id}`}
                     style={{ width: "35px", height: "35px" }}
                   />
                 </IconButton>

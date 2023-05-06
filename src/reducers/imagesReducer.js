@@ -1,5 +1,8 @@
 function imagesReducer(state = [], action) {
   switch (action.type) {
+    case "UPDATE_CURRENT_USER":
+      return action.payload;
+
     case "LOAD_IMAGES_FROM_SERVER":
       return action.payload;
 

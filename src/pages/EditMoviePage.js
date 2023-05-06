@@ -88,7 +88,7 @@ export default function EditMoviePage() {
       myAlert("Movie updated successfully", "success");
       setTimeout(() => {
         navigate("/allmovies");
-      }, 1500);
+      }, 1000);
     }
   }
 

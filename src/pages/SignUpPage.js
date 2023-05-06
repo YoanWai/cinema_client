@@ -55,7 +55,7 @@ export default function SignUpPage({ callback }) {
       myAlert("Registration successful!", "success");
       setTimeout(() => {
         navigate("/login");
-      }, 1500);
+      }, 1000);
     }
   };
 

@@ -23,6 +23,8 @@ import { myAlert, alertContainer } from "../utils/alertUtil";
 
 import fetcher from "../utils/fetchWithTokenUtil";
 
+// TODO: Split this component into smaller components
+
 export default function AccountPage() {
   const dispatch = useDispatch();
 
@@ -34,7 +36,7 @@ export default function AccountPage() {
       myAlert("You are not logged in. Please login.");
       setTimeout(() => {
         window.location.href = "/login";
-      }, 1500);
+      }, 1000);
     }
   };
 
@@ -79,10 +81,16 @@ export default function AccountPage() {
   const handleImageUpload = async () => {
     if (!image) return;
 
-    const newImage = new File([image], `${user.id}`, { type: image.type });
-    const response = await fetcher(`/images`, "POST", newImage);
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const response = await fetcher(`/images/${user.id}`, "POST", formData, {
+      "Content-Type": "multipart/form-data",
+    });
+    console.log(response);
     if (response.status === 200) {
       console.log("Image uploaded successfully");
+      window.location.reload();
       myAlert("Image uploaded successfully", "success");
     } else {
       console.log(`Error uploading image: ${response.status}`);
@@ -118,7 +126,7 @@ export default function AccountPage() {
                       >
                         <Avatar
                           alt={user.fullname}
-                          src={`http://localhost:5000/images/${user.id}`}
+                          src={`${process.env.REACT_APP_MAIN_SERVER_BASEURL}/images/${user.id}`}
                           sx={{
                             height: 130,
                             mb: 2,
