@@ -21,6 +21,8 @@ import { myAlert, alertContainer } from "../utils/alertUtil";
 const theme = createTheme();
 
 export default function SignUpPage({ callback }) {
+  const [loading, setLoading] = React.useState(false);
+
   const navigate = useNavigate();
 
   const [newUser, setNewUser] = useState({
@@ -55,7 +57,7 @@ export default function SignUpPage({ callback }) {
       myAlert("Registration successful!", "success");
       setTimeout(() => {
         navigate("/login");
-      }, 1000);
+      }, 1500);
     }
   };
 

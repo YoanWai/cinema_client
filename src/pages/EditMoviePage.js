@@ -15,6 +15,8 @@ import Button from "@mui/material/Button";
 import { myAlert, alertContainer } from "../utils/alertUtil";
 
 export default function EditMoviePage() {
+  const [loading, setLoading] = React.useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -88,7 +90,7 @@ export default function EditMoviePage() {
       myAlert("Movie updated successfully", "success");
       setTimeout(() => {
         navigate("/allmovies");
-      }, 1000);
+      }, 1500);
     }
   }
 

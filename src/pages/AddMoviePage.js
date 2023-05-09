@@ -14,6 +14,8 @@ import Button from "@mui/material/Button";
 import { myAlert, alertContainer } from "../utils/alertUtil";
 
 export default function AddMoviePage() {
+  const [loading, setLoading] = React.useState(false);
+  
   const navigate = useNavigate();
 
   const [newMovie, setNewMovie] = React.useState({
@@ -34,7 +36,7 @@ export default function AddMoviePage() {
       myAlert("Movie added successfully", "success");
       setTimeout(() => {
         navigate("/allmovies");
-      }, 1000);
+      }, 1500);
     } else {
       myAlert("Error adding movie", "error");
       console.log(response);

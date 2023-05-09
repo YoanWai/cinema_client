@@ -19,12 +19,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
-
 import Link from "@mui/material/Link";
+
+import Loader from "../components/LoadingIconComp";
 
 const theme = createTheme();
 
 export default function LoginPage({ callback }) {
+  const [loading, setLoading] = React.useState(false);
+
   // handle hiding navbar
   useEffect(() => {
     callback();
@@ -38,6 +41,7 @@ export default function LoginPage({ callback }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const inputs = new FormData(event.currentTarget);
     const payload = {
@@ -49,12 +53,15 @@ export default function LoginPage({ callback }) {
     console.log(response);
 
     if (response.code === "ERR_NETWORK") {
+      setLoading(false);
       setError("Network error. Please try again later.");
       setShowError(true);
+
       return;
     }
 
     if (response.code === "ERR_BAD_REQUEST") {
+      setLoading(false);
       console.log(`Error: ${response.response.data.message}`);
       setError(response.response.data.message);
       setShowError(true);
@@ -62,12 +69,14 @@ export default function LoginPage({ callback }) {
     }
 
     if (response?.response?.status === 403) {
+      setLoading(false);
       setError(response.response.data.message);
       setShowError(true);
       return;
     }
 
     if (response.success) {
+      setLoading(false);
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("user", JSON.stringify(response.data.user));
       dispatch({ type: "LOGIN_USER", payload: response.data.user });
@@ -78,6 +87,7 @@ export default function LoginPage({ callback }) {
 
   return (
     <ThemeProvider theme={theme}>
+      {loading ? <Loader /> : null}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
 

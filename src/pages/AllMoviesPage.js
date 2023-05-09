@@ -14,10 +14,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
+import Loader from "../components/LoadingIconComp";
 
 const theme = createTheme();
 
 export default function AllMoviesPage({ callback }) {
+  const [loading, setLoading] = React.useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,6 +55,8 @@ export default function AllMoviesPage({ callback }) {
 
   return (
     <ThemeProvider theme={theme}>
+      {loading ? <Loader /> : null}
+
       <main style={{ textAlign: "center" }}>
         <Box
           sx={{

@@ -30,7 +30,7 @@ export default function MemberCard({ member }) {
       myAlert("Member deleted successfully", "success");
       setTimeout(() => {
         navigate("/members");
-      }, 1000);
+      }, 1500);
     } else {
       console.log(`error deleting member: ${JSON.stringify(member)}`);
       myAlert("Error deleting member", "error");

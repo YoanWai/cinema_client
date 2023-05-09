@@ -10,23 +10,30 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import { myAlert, alertContainer } from "../utils/alertUtil";
+import Loader from "../components/LoadingIconComp";
 
 export default function AddMemberPage() {
+  const [loading, setLoading] = React.useState(false);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [member, setMembers] = React.useState({});
 
   const addMember = async () => {
+    setLoading(true);
     const response = await fetcher("/members", "post", member);
     if (response.status === 200) {
       myAlert("Member added successfully", "success");
       dispatch({ type: "ADD_MEMBER", payload: member });
+
       setTimeout(() => {
+        setLoading(false);
         navigate("/members");
-      }, 1000);
+      }, 1500);
     } else {
       myAlert("Error adding member", "error");
+      setLoading(false);
       console.log(`Error adding member: ${response.status}`);
     }
   };
@@ -60,6 +67,7 @@ export default function AddMemberPage() {
   return (
     <>
       <div style={styles.container}>
+        {loading ? <Loader /> : null}
         <div style={styles.title}>Add New Member</div>
         <div style={styles.inputs}>
           <Box

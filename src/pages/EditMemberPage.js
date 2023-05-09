@@ -12,6 +12,8 @@ import Button from "@mui/material/Button";
 import { myAlert, alertContainer } from "../utils/alertUtil";
 
 export default function EditMemberPage() {
+  const [loading, setLoading] = React.useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ export default function EditMemberPage() {
       myAlert("Member updated successfully", "success");
       setTimeout(() => {
         navigate("/members");
-      }, 1000);
+      }, 1500);
     } else {
       console.log(`Error updating member: ${response.status}`);
       myAlert("Error updating member", "error");

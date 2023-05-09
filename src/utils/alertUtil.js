@@ -6,7 +6,7 @@ const myAlert = (message, type) => {
     case "error":
       toast.error(message, {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -20,7 +20,7 @@ const myAlert = (message, type) => {
     case "success":
       toast.success(message, {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -34,7 +34,7 @@ const myAlert = (message, type) => {
     case "warn":
       toast.warn(message, {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -47,7 +47,7 @@ const myAlert = (message, type) => {
     case "info":
       toast.info(message, {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -66,7 +66,7 @@ const alertContainer = () => {
     <div>
       <ToastContainer
         position="top-center"
-        autoClose={1000}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -20,12 +20,15 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { myAlert, alertContainer } from "../utils/alertUtil";
+import Loader from "../components/LoadingIconComp";
 
 import fetcher from "../utils/fetchWithTokenUtil";
 
 // TODO: Split this component into smaller components
 
 export default function AccountPage() {
+  const [loading, setLoading] = React.useState(false);
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -36,7 +39,7 @@ export default function AccountPage() {
       myAlert("You are not logged in. Please login.");
       setTimeout(() => {
         window.location.href = "/login";
-      }, 1000);
+      }, 1500);
     }
   };
 
@@ -59,6 +62,7 @@ export default function AccountPage() {
   }));
 
   async function handleSubmit() {
+    setLoading(true);
     const userToSend = {
       id: inputUser.id,
       fullname: `${inputUser.firstname} ${inputUser.lastname}`,
@@ -72,9 +76,11 @@ export default function AccountPage() {
     if (response.status === 200) {
       myAlert("User updated successfully", "success");
       dispatch({ type: "UPDATE_USER", payload: userToSend });
+      setLoading(false);
     } else {
       console.log(`Error updating user: ${response.status}`);
       myAlert("Error updating user", "error");
+      setLoading(false);
     }
   }
 
@@ -100,6 +106,7 @@ export default function AccountPage() {
 
   return (
     <>
+      {loading ? <Loader /> : null}
       <Box
         component="main"
         sx={{
